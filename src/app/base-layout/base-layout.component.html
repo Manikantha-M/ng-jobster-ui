@@ -1,1 +1,20 @@
-<p>base-layout works!</p>
+<!-- <p>base-layout works!</p> -->
+<div class="sidebar-container">
+@if (shouldRun) {
+    <mat-sidenav-container >
+      <mat-sidenav #sidenav [mode]="mode" [opened]="true">
+        <div style="height: 100vh;background-color: red;">
+        <!-- <button mat-button (click)="sidenav.toggle()">Toggle</button> -->
+        <h1>JOBSTER</h1>
+
+        </div>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <p><button mat-button (click)="sidenav.toggle()">Toolbar goes here</button></p>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  } @else {
+    <div>Please open on Stackblitz to see result</div>
+  }
+</div>
