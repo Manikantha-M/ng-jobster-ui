@@ -3,15 +3,16 @@
 @if (shouldRun) {
     <mat-sidenav-container >
       <mat-sidenav #sidenav [mode]="mode" [opened]="true">
-        <div style="height: 100vh;background-color: red;">
+        <div fxLayout="column wrap" style="height: 100vh;background-color: red;">
         <!-- <button mat-button (click)="sidenav.toggle()">Toggle</button> -->
         <h1>JOBSTER</h1>
 
         </div>
       </mat-sidenav>
   
-      <mat-sidenav-content>
+      <mat-sidenav-content style="height: 100vh;">
         <p><button mat-button (click)="sidenav.toggle()">Toolbar goes here</button></p>
+        <router-outlet></router-outlet>
       </mat-sidenav-content>
     </mat-sidenav-container>
   } @else {

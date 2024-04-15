@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import {MatDrawerMode, MatSidenavModule} from '@angular/material/sidenav';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-base-layout',
   standalone: true,
-  imports: [MatSidenavModule, MatButtonModule, MatRadioModule],
+  imports: [MatSidenavModule, MatButtonModule, MatRadioModule, RouterModule],
   templateUrl: './base-layout.component.html',
   styleUrl: './base-layout.component.scss'
 })
