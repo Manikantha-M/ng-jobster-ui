@@ -1,17 +1,51 @@
 <!-- <p>base-layout works!</p> -->
 <div class="sidebar-container">
 @if (shouldRun) {
-    <mat-sidenav-container >
+    <mat-sidenav-container>
       <mat-sidenav #sidenav [mode]="mode" [opened]="true">
-        <div fxLayout="column wrap" style="height: 100vh;background-color: red;">
-        <!-- <button mat-button (click)="sidenav.toggle()">Toggle</button> -->
-        <h1>JOBSTER</h1>
+        <div fxLayout="column wrap" style="height: 100vh; width: 220px;padding: 1rem;">
 
+        <!-- <button mat-button (click)="sidenav.toggle()">Toggle</button> -->
+        <img src="../../assets/icons/jobster_logo.svg">
+
+        <!-- Un-ordered list -->
+        <div fxLayout="column wrap">
+          <mat-list>
+            @for (item of menu; track item) {
+              <mat-list-item [routerLink]="item.route">
+                <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+                <div matListItemTitle>{{item.name}}</div>
+              </mat-list-item>
+            }
+          </mat-list>
+        </div>
         </div>
       </mat-sidenav>
-  
       <mat-sidenav-content style="height: 100vh;">
-        <p><button mat-button (click)="sidenav.toggle()">Toolbar goes here</button></p>
+
+        <!-- Toolbar -->
+        <div style="width: 100%;">
+        <mat-toolbar style="width: 100%;">
+          <div fxLayout="row nowrap" fxLayoutAlign="space-between center"  style="width: 100%; padding:1.5rem 0;">
+            <!-- Menu -->
+            <div fxLayout="column nowrap">
+              <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+              </button>
+            </div>
+            <!-- Title -->
+            <div fxLayout="column nowrap">
+              <span>Dashboard</span>
+            </div>
+            <!-- Account -->
+            <div fxLayout="column nowrap">
+              <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                <mat-icon>favorite</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-toolbar>
+      </div>
         <router-outlet></router-outlet>
       </mat-sidenav-content>
     </mat-sidenav-container>
