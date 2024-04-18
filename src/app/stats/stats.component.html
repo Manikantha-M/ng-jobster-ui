@@ -1,5 +1,5 @@
 <!-- <p>stats works!</p> -->
-<div fxLayout="row nowrap" fxFlex="100">
+<div fxLayout="column nowrap" fxFlex="100">
     <!-- card -->
     <div fxLayout="row nowrap" fxFlex="100" fxLayoutAlign="space-between center" style="padding: 2rem;">
     @for (card of statCards; track card) {
@@ -13,10 +13,32 @@
                 </mat-icon>
             </div>
         </div>
-        <h2>Pending Applications</h2>
+        <h2>{{card.title}}</h2>
     </div>
     }
+    </div>
 
     <!-- Bar Chart Monthly Application-->
+    <div fxLayout="column nowrap" fxFlex="100" fxLayoutAlign="center center">
+        <h1>Monthly Applications</h1>
+    <p style="color: #3B81F6;">Bar Chart</p>
+    </div>
+    
+    <div fxLayout="column nowrap">
+        <ngx-charts-bar-vertical
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="singleBarChart"
+        [barPadding] = "100"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
     </div>
 </div>

@@ -11,7 +11,7 @@
         <!-- Un-ordered list -->
         <div fxLayout="column wrap">
           <mat-list>
-            @for (item of menu; track item) {
+            @for (item of sindeMenu; track item) {
               <mat-list-item [routerLink]="item.route">
                 <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
                 <div matListItemTitle>{{item.name}}</div>
@@ -21,11 +21,12 @@
         </div>
         </div>
       </mat-sidenav>
+
       <mat-sidenav-content style="height: 100vh;">
 
         <!-- Toolbar -->
         <div style="width: 100%;">
-        <mat-toolbar style="width: 100%;">
+        <mat-toolbar style="width: 100%;background-color: white;">
           <div fxLayout="row nowrap" fxLayoutAlign="space-between center"  style="width: 100%; padding:1.5rem 0;">
             <!-- Menu -->
             <div fxLayout="column nowrap">
@@ -39,14 +40,17 @@
             </div>
             <!-- Account -->
             <div fxLayout="column nowrap">
-              <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-                <mat-icon>favorite</mat-icon>
-              </button>
+              <button mat-button [matMenuTriggerFor]="menu">Test User</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Logout</button>
+              </mat-menu>
             </div>
           </div>
         </mat-toolbar>
       </div>
+      <div style="background-color: #F0F4F8;height: 100%;">
         <router-outlet></router-outlet>
+      </div>
       </mat-sidenav-content>
     </mat-sidenav-container>
   } @else {
