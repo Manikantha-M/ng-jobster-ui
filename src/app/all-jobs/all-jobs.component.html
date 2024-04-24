@@ -1,31 +1,61 @@
-<form [formGroup] = "searchForm">
-<div fxLayout = "row nowrap" fxFlex="100">
-    <!-- search -->
-    <div fxLayout="column nowrap">
-        <mat-form-field appearance="outline">
-            <mat-label>Search</mat-label>
-            <input matInput type="text" formControlName="search">
-        </mat-form-field>
-    </div>
-    <!-- status -->
-    <!-- <div fxLayout="column nowrap">
-        <mat-form-field formControlName="status">
-            
-        </mat-form-field>
-    </div> -->
-    
+<div fxLayout="column nowrap" fxFlex="100" fxLayoutGap = "32px" style="padding: 50px;">
 
-    <!-- type -->
-    <!-- <div fxLayout="column nowrap">
-        <mat-form-field formControlName="type">
-            
-        </mat-form-field>
-    </div> -->
-    <!--  -->
-    <!-- <div fxLayout="column nowrap">
-        <mat-form-field formControlName="sort">
-            
-        </mat-form-field>
-    </div> -->
-</div>
+<!-- Search Form -->
+<div fxLayout="column nowrap" fxFlex="100" fxLayoutGap = "32px" class="search-form">
+<h1>Search Form</h1>
+<form [formGroup]="searchForm">
+    <div fxLayout="row wrap" fxFlex="100" fxLayoutGap = "32px">
+        <!-- search -->
+        <div fxLayout="column nowrap" fxFlex="30">
+            <mat-form-field appearance="outline">
+                <mat-label>Search</mat-label>
+                <input matInput type="text" formControlName="search">
+            </mat-form-field>
+        </div>
+
+        <!-- status -->
+        <div fxLayout="column nowrap" fxFlex="30">
+            <mat-form-field appearance="outline">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    @for (option of statusArr; track option) {
+                    <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- type -->
+        <div fxLayout="column nowrap" fxFlex="30">
+            <mat-form-field appearance="outline">
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="type">
+                    @for (option of typeArr; track option) {
+                    <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- sort -->
+        <div fxLayout="column nowrap" fxFlex="30">
+            <mat-form-field appearance="outline">
+                <mat-label>Sort</mat-label>
+                <mat-select formControlName="sort">  
+                    @for (option of sortArr; track option) {
+                    <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- Button -->
+        <div fxLayout="column nowrap" fxFlex="30">
+            <button mat-raised-button color="primary" style="margin-top: 6px;">Primary</button>
+        </div>
+    </div>
 </form>
+</div>
+
+<!-- Search list -->
+</div>
