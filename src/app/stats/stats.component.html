@@ -1,9 +1,9 @@
 <!-- <p>stats works!</p> -->
-<div fxLayout="column nowrap" fxFlex="100">
+<div fxLayout="column nowrap" fxFlex="100" fxLayoutGap = "32px">
     <!-- card -->
     <div fxLayout="row nowrap" fxFlex="100" fxLayoutAlign="space-between center" style="padding: 2rem;">
     @for (card of statCards; track card) {
-        <div fxLayout="column nowrap" fxFlex="30" style="padding: 32px; border-bottom: 2px solid;"
+        <div fxLayout="column nowrap" fxFlex="30" style="padding: 32px; border-bottom: 2px solid; background-color: white;"
         fxLayoutGap="32px" [style.border-color]="card.color">
         <div fxLayout="row nowrap" fxLayoutAlign="space-between center">
             <div fxLayout="column nowrap" style="font-size: 32px;" [style.color]="card.color">28</div>

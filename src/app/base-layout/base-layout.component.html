@@ -4,16 +4,14 @@
     <mat-sidenav-container>
       <mat-sidenav #sidenav [mode]="mode" [opened]="true">
         <div fxLayout="column wrap" style="height: 100vh; width: 220px;padding: 1rem;">
-
-        <!-- <button mat-button (click)="sidenav.toggle()">Toggle</button> -->
         <img src="../../assets/icons/jobster_logo.svg">
 
         <!-- Un-ordered list -->
         <div fxLayout="column wrap">
           <mat-list>
-            @for (item of sindeMenu; track item) {
-              <mat-list-item [routerLink]="item.route">
-                <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+            @for (item of sideMenu; track item) {
+              <mat-list-item (click)="navTo(item)" [class.selected-menu]="item.selected">
+                <mat-icon matListItemIcon >{{item.icon}}</mat-icon>
                 <div matListItemTitle>{{item.name}}</div>
               </mat-list-item>
             }

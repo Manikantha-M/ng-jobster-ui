@@ -7,7 +7,11 @@
     transition: var(--transition);
 }
 
-// reset matdrawer styles
-// .example-spacer {
-//     flex: 0 1 auto;
-//   }
+.selected-menu {
+    .mat-icon{
+        color: var(--primary-500);
+    }
+    .mat-mdc-list-item-title{
+        color: var(--primary-500);
+    }
+}
