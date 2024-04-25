@@ -93,32 +93,53 @@
         @for (item of searchResultList; track $index) {
             <div fxLayout="column wrap" fxLayoutAlign="center start" fxFlex="47" class="jobs-card">
                 <!-- row1 -->
-                <div fxLayout="row nowrap" fxLayoutGap = "12px">
+                <div fxLayout="row nowrap" fxLayoutGap = "12px" class="width-100 job-card-header">
                     <div fxLayout="column nowrap">
                         <div class="company-logo">{{item.position[0]}}
                         </div>
                     </div>
                     <div fxLayout="column nowrap" fxLayoutAlign="center start">
-                        <div>{{item.position}}</div>
-                        <div>{{item.company}}</div>
+                        <div style="font-size:20px;color: var(--textColor);">{{item.position}}</div>
+                        <div style="color: var(--grey-400)">{{item.company}}</div>
                     </div>
                 </div>
                 <!-- row2 -->
-                <div fxLayout="row nowrap" fxLayoutAlign="space-between center" class="width-100">
+                <div fxLayout="row nowrap" fxLayoutAlign="space-between center" class="width-100" style="margin-top: 20px;">
                     <div fxLayout="column nowrap" style="text-transform: capitalize;">
-                        {{item.jobLocation}}
+                        <div fxLayout="row nowrap" fxLayoutGap="8px" fxLayoutAlign="start center">
+                            <div fxLayout="column nowrap">
+                                <mat-icon style="color: var(--grey-400);">near_me</mat-icon>
+                            </div>
+                            <div fxLayout="column nowrap" style="font-size: 1rem;color: var(--textColor);">
+                                {{item.jobLocation}}
+                            </div>
+                        </div>
                     </div>
                     <div fxLayout="column nowrap">
-                        {{item.createdAt | date:'mediumDate'}}
+                        <div fxLayout="row nowrap" fxLayoutGap="8px" fxLayoutAlign="start center">
+                            <div fxLayout="column nowrap">
+                                <mat-icon style="color: var(--grey-400);">calendar_month</mat-icon>
+                            </div>
+                            <div fxLayout="column nowrap" style="font-size: 1rem;color: var(--textColor);">
+                                {{item.createdAt | date:'mediumDate'}}
+                            </div>
+                        </div>
                     </div>
                 </div>
                  <!-- row3 -->
-                 <div fxLayout="row nowrap" fxLayoutAlign="space-between center" class="width-100">
+                 <div fxLayout="row nowrap" fxLayoutAlign="space-between center" class="width-100" style="margin-top: 20px;">
                     <div fxLayout="column nowrap" style="text-transform: capitalize;">
-                        {{item.jobType}}
+                        <div fxLayout="row nowrap" fxLayoutGap="8px" fxLayoutAlign="start center">
+                            <div fxLayout="column nowrap">
+                                <mat-icon style="color: var(--grey-400);">business_center</mat-icon>
+                            </div>
+                            <div fxLayout="column nowrap" style="font-size: 1rem;color: var(--textColor);">
+                                {{item.jobType}}
+                            </div>
+                        </div>
                     </div>
                     <div fxLayout="column nowrap">
-                        {{item.status}}
+                        <button mat-raised-button color="primary" style="text-transform: capitalize; color: rgb(214, 106, 106);background: rgb(255, 238, 238);">{{item.status}}</button>
                     </div>
                  </div>
                  <!-- row4 -->

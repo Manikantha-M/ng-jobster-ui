@@ -21,6 +21,11 @@
 }
 .jobs-card{
     padding: 16px 24px;
-    border: 1px solid var(--grey-500);
+    border: 1px solid var(--grey-100);
     border-radius: var(--borderRadius);
+    margin-bottom: 16px;
+}
+.job-card-header {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--grey-100)
 }
