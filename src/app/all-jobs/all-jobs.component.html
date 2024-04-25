@@ -89,9 +89,9 @@
       <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
     <!-- </table> -->
 
-    <div fxLayout="column nowrap" style="background-color: white;">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="jobs-card-container">
         @for (item of searchResultList; track $index) {
-            <div fxLayout="column nowrap" fxLayoutAlign="center start">
+            <div fxLayout="column wrap" fxLayoutAlign="center start" fxFlex="47" class="jobs-card">
                 <!-- row1 -->
                 <div fxLayout="row nowrap" fxLayoutGap = "12px">
                     <div fxLayout="column nowrap">

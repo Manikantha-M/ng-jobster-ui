@@ -14,3 +14,13 @@
     display: grid;
     place-content: center;
 }
+.jobs-card-container {
+    background-color: white;
+    padding: 32px;
+
+}
+.jobs-card{
+    padding: 16px 24px;
+    border: 1px solid var(--grey-500);
+    border-radius: var(--borderRadius);
+}
