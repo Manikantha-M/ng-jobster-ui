@@ -2,3 +2,15 @@
     background-color: white;
     padding: 50px;
 }
+.company-logo{
+    background: var(--primary-500);
+    border-radius: var(--borderRadius);
+    font-size: 1.5rem;;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--white);
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-content: center;
+}

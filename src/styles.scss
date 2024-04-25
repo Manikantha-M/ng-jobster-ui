@@ -338,6 +338,9 @@ html {
   --mat-form-field-filled-with-label-container-padding-bottom: 8px;
 }
 
+.width-100 {
+  width: 100%
+}
 // Imports
 
 @import url('../src/app/base-layout/base-layout.component.scss');

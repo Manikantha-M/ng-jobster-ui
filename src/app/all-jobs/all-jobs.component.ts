@@ -8,10 +8,11 @@ import {MatSelectModule} from '@angular/material/select';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-all-jobs',
   standalone: true,
-  imports: [FlexLayoutModule, ReactiveFormsModule, MatIconModule, MatButtonModule, FormsModule, MatInputModule, MatFormFieldModule, MatSelectModule, MatTableModule, MatPaginatorModule],
+  imports: [FlexLayoutModule, ReactiveFormsModule, MatIconModule, MatButtonModule, FormsModule, MatInputModule, MatFormFieldModule, MatSelectModule, MatTableModule, MatPaginatorModule, DatePipe],
   templateUrl: './all-jobs.component.html',
   styleUrl: './all-jobs.component.scss'
 })
@@ -161,7 +162,7 @@ export class AllJobsComponent implements OnInit {
       }
     ];
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position', 'company', 'jobLocation', 'createdAt'];
   dataSource = new MatTableDataSource(this.searchResultList);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   ngAfterViewInit() {
