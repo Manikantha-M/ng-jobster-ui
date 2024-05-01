@@ -51,7 +51,7 @@
 
         <!-- Button -->
         <div fxLayout="column nowrap" fxFlex="30">
-            <button mat-raised-button color="primary" style="margin-top: 6px;">Primary</button>
+            <button class="edit-btn" mat-raised-button style="margin-top: 6px;">Clear Filters</button>
         </div>
     </div>
 </form>
@@ -59,36 +59,6 @@
 
 <!-- Search list -->
 <div class="mat-elevation-z8">
-    <!-- <table mat-table [dataSource]="dataSource"> -->
-  
-      <!-- Position Column -->
-      <!-- <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-      </ng-container> -->
-  
-      <!-- Name Column -->
-      <!-- <ng-container matColumnDef="company">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.company}} </td>
-      </ng-container> -->
-  
-      <!-- Weight Column -->
-      <!-- <ng-container matColumnDef="jobLocation">
-        <th mat-header-cell *matHeaderCellDef> Weight </th>
-        <td mat-cell *matCellDef="let element"> {{element.jobLocation}} </td>
-      </ng-container> -->
-  
-      <!-- Symbol Column -->
-      <!-- <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef> Symbol </th>
-        <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
-      </ng-container> -->
-  
-      <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
-      <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
-    <!-- </table> -->
-
     <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="jobs-card-container">
         @for (item of searchResultList; track $index) {
             <div fxLayout="column wrap" fxLayoutAlign="center start" fxFlex="47" class="jobs-card">
@@ -145,10 +115,10 @@
                  <!-- row4 -->
                  <div fxLayout="row nowrap" fxLayoutAlign="start center" fxLayoutGap="10px">
                     <div fxLayout="column nowrap">
-                        <button mat-raised-button color="primary">Edit</button>
+                        <button class="edit-btn" mat-raised-button color="primary">Edit</button>
                     </div>
                     <div fxLayout="column nowrap">
-                        <button mat-raised-button color="primary">Delete</button>
+                        <button class="delete-btn" mat-raised-button color="primary">Delete</button>
                     </div>
                  </div>
             </div>    
