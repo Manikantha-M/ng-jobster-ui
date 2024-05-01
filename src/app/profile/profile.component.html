@@ -1,0 +1,46 @@
+<div fxLayout="column nowrap" fxFlex="100" style="padding: 50px;">
+    <!-- Search Form -->
+    <div fxLayout="column nowrap" fxFlex="100" fxLayoutGap="32px" class="search-form">
+        <h1>Add Job</h1>
+        <form [formGroup]="profileForm">
+            <div fxLayout="row wrap" fxFlex="100" fxLayoutGap="32px">
+                <!-- firstname -->
+                <div fxLayout="column nowrap" fxFlex="30">
+                    <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput type="text" formControlName="firstname">
+                    </mat-form-field>
+                </div>
+
+                <!-- lastname -->
+                <div fxLayout="column nowrap" fxFlex="30">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput type="text" formControlName="lastname">
+                    </mat-form-field>
+                </div>
+
+                <!-- email -->
+                <div fxLayout="column nowrap" fxFlex="30">
+                    <mat-form-field appearance="outline">
+                        <mat-label>email</mat-label>
+                        <input matInput type="email" formControlName="email">
+                    </mat-form-field>
+                </div>
+
+                <!-- location -->
+                <div fxLayout="column nowrap" fxFlex="30">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Location</mat-label>
+                        <input matInput type="text" formControlName="lastname">
+                    </mat-form-field>
+                </div>
+
+                <!-- Button -->
+                <div fxLayout="column nowrap" fxFlex="30">
+                    <button class="delete-btn" mat-raised-button  style="margin-top: 6px; background: var(--primary-500);color: white;">Save Changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

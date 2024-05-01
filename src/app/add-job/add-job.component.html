@@ -1,0 +1,67 @@
+<div fxLayout="column nowrap" fxFlex="100" style="padding: 50px;">
+<!-- Search Form -->
+<div fxLayout="column nowrap" fxFlex="100" fxLayoutGap = "32px" class="search-form">
+    <h1>Add Job</h1>
+    <form [formGroup]="addJobForm">
+        <div fxLayout="row wrap" fxFlex="100" fxLayoutGap = "32px">
+            <!-- position -->
+            <div fxLayout="column nowrap" fxFlex="30">
+                <mat-form-field appearance="outline">
+                    <mat-label>Position</mat-label>
+                    <input matInput type="text" formControlName="position">
+                </mat-form-field>
+            </div>
+
+            <!-- company -->
+            <div fxLayout="column nowrap" fxFlex="30">
+                <mat-form-field appearance="outline">
+                    <mat-label>Company</mat-label>
+                    <input matInput type="text" formControlName="company">
+                </mat-form-field>
+            </div>
+
+            <!-- Job Location -->
+            <div fxLayout="column nowrap" fxFlex="30">
+                <mat-form-field appearance="outline">
+                    <mat-label>Job Location</mat-label>
+                    <input matInput type="text" formControlName="jobLocation">
+                </mat-form-field>
+            </div>
+    
+            <!-- status -->
+            <div fxLayout="column nowrap" fxFlex="30">
+                <mat-form-field appearance="outline">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                        @for (option of statusArr; track option) {
+                        <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+    
+            <!-- type -->
+            <div fxLayout="column nowrap" fxFlex="30">
+                <mat-form-field appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="jobType">
+                        @for (option of typeArr; track option) {
+                        <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+    
+            <!-- Button -->
+            <div fxLayout="row nowrap" fxFlex="30" fxLayoutGap = "12px">
+                <div fxFlex="48">
+                    <button class="edit-btn width-100 clear-btn" mat-raised-button style="margin-top: 6px;">Clear</button>
+                </div>
+                <div fxFlex="48">
+                    <button class="width-100" mat-raised-button style="margin-top: 6px; background: var(--primary-500);color: white;">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
