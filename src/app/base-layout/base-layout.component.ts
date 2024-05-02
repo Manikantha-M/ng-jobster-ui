@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-// import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDrawerMode, MatSidenavModule} from '@angular/material/sidenav';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
@@ -21,7 +20,7 @@ export interface Section {
   templateUrl: './base-layout.component.html',
   styleUrl: './base-layout.component.scss'
 })
-export class BaseLayoutComponent implements OnInit{
+export class BaseLayoutComponent {
   mode :any= 'side';
   shouldRun = true;
   sideMenu: any[]= [
@@ -51,10 +50,6 @@ export class BaseLayoutComponent implements OnInit{
     }
   ];
   constructor(private _router: Router){}
-  ngOnInit(): void {
-  //   if(this._router === '/register')
-  //   console.log(true)
-  }
   navTo(item: any){
     this.sideMenu.find(item => item.selected).selected = false;
     item.selected = true;
