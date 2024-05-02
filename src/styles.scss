@@ -351,3 +351,22 @@ html {
   background-color: white;
   padding: 50px;
 }
+
+.register-container{
+  place-content: center;
+  height: 100vh;
+  align-items: center;
+}
+
+.register{
+  max-width: 500px!important;
+  min-height: fit-content;
+  border-top: 5px solid var(--primary-500);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-2);
+}
+
+.register-title {
+  color: var(--grey-900);
+  font-size: 32px;
+}

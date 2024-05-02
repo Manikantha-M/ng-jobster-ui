@@ -1,5 +1,54 @@
-<div fxLayout="column nowrap" fxFlex="100" fxLayoutALign="center center">
-    <div fxLayout="column wrap" style="height: 100vh; width: 220px;padding: 1rem;">
-        <img src="../../assets/icons/jobster_logo.svg">
-    </div>
+<div fxLayout="row nowrap" class="register-container" fxFlex="100" fxLayoutALign="center center">
+<div fxLayout="column nowrap" fxFlex="100" fxLayoutALign="center center" class="register">
+        <!-- Registration Form -->
+        <div fxLayout="column nowrap" fxFlex="100" fxLayoutGap = "32px" class="search-form">
+            <div fxLayout="column wrap">
+                <img src="../../assets/icons/jobster_logo.svg">
+            </div>
+            <div class="register-title title">Register</div>
+            <form [formGroup]="registrationForm">
+                <div fxLayout="column wrap" fxFlex="100" fxLayoutGap = "10px">
+                    <!-- name -->
+                    <div fxLayout="column nowrap">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Name</mat-label>
+                            <input matInput type="text" formControlName="name">
+                        </mat-form-field>
+                    </div>
+        
+                    <!-- email -->
+                    <div fxLayout="column nowrap">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" formControlName="email">
+                        </mat-form-field>
+                    </div>
+        
+                    <!-- password -->
+                    <div fxLayout="column nowrap">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="text" formControlName="password">
+                        </mat-form-field>
+                    </div>
+            
+                    <!-- Button -->
+                    <div fxLayout="column nowrap" fxLayoutGap="16px">
+                        <div>
+                            <button class="width-100" mat-raised-button style="margin-top: 6px; background: var(--primary-500);color: white;">Submit</button>
+                        </div>
+                        <div>
+                            <button class="edit-btn width-100 clear-btn" mat-raised-button style="margin-top: 6px;background: var(--primary-200);color: var(--primary-500);">Demo App</button>
+                        </div>
+                        <div fxLayout="row nowrap" fxLayoutGap="10px" class="title" fxLayoutAlign="center center">
+                           <div>Already a member?</div>
+                           <div class="member-btn">Login</div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+          
+        </div>
+
+</div>
 </div>
