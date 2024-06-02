@@ -38,9 +38,10 @@
             </div>
             <!-- Account -->
             <div fxLayout="column nowrap">
-              <button mat-button [matMenuTriggerFor]="menu">Test User</button>
+              <button mat-button [matMenuTriggerFor]="menu" class="btn">
+                <mat-icon>account_circle</mat-icon>Test User</button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item>Logout</button>
+                <button mat-menu-item style="text-align: center;background: var(--primary-100);">Logout</button>
               </mat-menu>
             </div>
           </div>

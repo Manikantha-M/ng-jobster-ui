@@ -149,11 +149,14 @@ ul {
   object-fit: cover;
 }
 /* buttons */
-
+//reset mat-mdc-menu-content
+.mat-mdc-menu-content {
+  padding: 0px!important;
+}
 .btn {
   cursor: pointer;
-  color: var(--white);
-  background: var(--primary-500);
+  color: var(--white)!important;
+  background: var(--primary-500)!important;
   border: transparent;
   border-radius: var(--borderRadius);
   letter-spacing: var(--letterSpacing);
@@ -164,7 +167,7 @@ ul {
   display: inline-block;
 }
 .btn:hover {
-  background: var(--primary-700);
+  background: var(--primary-700)!important;
   box-shadow: var(--shadow-3);
 }
 .btn-hipster {
@@ -369,4 +372,12 @@ html {
 .register-title {
   color: var(--grey-900);
   font-size: 32px;
+}
+
+.member-btn {
+  background: transparent;
+  border: transparent;
+  color: var(--primary-500);
+  cursor: pointer;
+  letter-spacing: var(--letterSpacing);
 }

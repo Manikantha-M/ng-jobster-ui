@@ -4,6 +4,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators, EmailValidator} from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +15,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 })
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
-  constructor(private _fb:FormBuilder){}
+  constructor(private _fb:FormBuilder, private _router:Router){}
 
   ngOnInit(): void {
     this.loginForm = this._fb.group({
       email:['',[Validators.required]],
       password:['', [Validators.required]]
     })
+  }
+  goToRegister(){
+    this._router.navigate(['/register']);
   }
 }
