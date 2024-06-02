@@ -5,6 +5,7 @@ import { AddJobComponent } from './add-job/add-job.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { BaseLayoutComponent } from './base-layout/base-layout.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
     {
@@ -17,5 +18,6 @@ export const routes: Routes = [
         ]
     },
     { path: 'register', component: RegisterComponent },
+    {path:'login', component:LoginComponent},
     { path: '', redirectTo: '/home/stats', pathMatch: 'full' }
 ];

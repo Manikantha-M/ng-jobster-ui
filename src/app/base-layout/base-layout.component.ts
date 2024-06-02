@@ -27,25 +27,25 @@ export class BaseLayoutComponent {
     {
       name: 'Stats',
       icon:'signal_cellular_alt',
-      route:'/stats',
+      route:'home/stats',
       selected: true
     },
     {
       name: 'All Jobs',
       icon: 'query_stats',
-      route:'/all-jobs',
+      route:'home/all-jobs',
       selected: false
     },
     {
       name: 'Add Job',
       icon: 'post_add',
-      route:'/add-job',
+      route:'home/add-job',
       selected: false
     },
     {
       name: 'Profile',
       icon: 'contact_page',
-      route:'/profile',
+      route:'home/profile',
       selected: false
     }
   ];
