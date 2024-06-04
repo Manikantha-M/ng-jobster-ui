@@ -5,7 +5,7 @@
                 <div fxLayout="column wrap">
                     <img src="../../assets/icons/jobster_logo.svg">
                 </div>
-                <div class="register-title title">Register</div>
+                <div class="register-title title">Login</div>
                 <form [formGroup]="loginForm">
                     <div fxLayout="column wrap" fxFlex="100" fxLayoutGap = "10px">
             
@@ -28,7 +28,7 @@
                         <!-- Button -->
                         <div fxLayout="column nowrap" fxLayoutGap="16px">
                             <div>
-                                <button class="width-100" mat-raised-button style="margin-top: 6px; background: var(--primary-500);color: white;">Submit</button>
+                                <button class="width-100" mat-raised-button style="margin-top: 6px; background: var(--primary-500);color: white;" (click)="loginUser()" [disabled]="!loginForm.valid">Submit</button>
                             </div>
                             <div>
                                 <button class="edit-btn width-100 clear-btn" mat-raised-button style="margin-top: 6px;background: var(--primary-200);color: var(--primary-500);">Demo App</button>

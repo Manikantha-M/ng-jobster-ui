@@ -5,6 +5,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators, EmailValidator} from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit{
   registrationForm!: FormGroup;
-  constructor(private _fb:FormBuilder, private _router:Router){}
+  constructor(private _fb:FormBuilder, private _router:Router, private _dataService: DataService){}
 
   ngOnInit(): void {
     this.registrationForm = this._fb.group({
@@ -26,5 +27,12 @@ export class RegisterComponent implements OnInit{
   }
   goTologin(){
     this._router.navigate(['/login'])
+  }
+  registerUser(){
+    const data = this.registrationForm.value;
+    console.log(data)
+    this._dataService.post('v1/auth/register', data).subscribe(response => {
+      console.log(response);
+    });
   }
 }
