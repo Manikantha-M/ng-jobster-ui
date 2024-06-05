@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   private apiUrl = 'http://localhost:3000/api';
+  public token:string = '';
+  public userObj: object = {};
 
   // Since Angular app and Node.js server are on the same host, you can use a relative URL '/api'
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _snackbar:MatSnackBar) { }
 
 
   // GET request
@@ -41,4 +44,7 @@ export class DataService {
     return this.http.delete(`${this.apiUrl}/${endpoint}`);
   }
   
+  showSnackbar(message: string){
+    this._snackbar.open(message,'ok',{duration:3000});
+  }
 }

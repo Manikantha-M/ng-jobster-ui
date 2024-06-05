@@ -381,3 +381,10 @@ html {
   cursor: pointer;
   letter-spacing: var(--letterSpacing);
 }
+
+.full-screen-spinner {
+  z-index: 10;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
