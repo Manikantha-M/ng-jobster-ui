@@ -8,7 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
-
+import { DataService } from '../data.service';
 export interface Section {
   name: string;
   icon: string;
@@ -49,11 +49,13 @@ export class BaseLayoutComponent {
       selected: false
     }
   ];
-  constructor(private _router: Router){}
+  constructor(private _router: Router, public _dataService: DataService){}
   navTo(item: any){
     this.sideMenu.find(item => item.selected).selected = false;
     item.selected = true;
     this._router.navigate([item.route]);
   }
-  
+  logoutUser(){
+    this._router.navigate(['/login'])
+  }
 }

@@ -6,16 +6,17 @@ import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators, E
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
-
+import { SpinnerComponent } from '../spinner/spinner.component';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [MatButtonModule, MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, FlexLayoutModule],
+  imports: [MatButtonModule, MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, FlexLayoutModule,SpinnerComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent implements OnInit{
   registrationForm!: FormGroup;
+  hideSpinner: boolean = true;
   constructor(private _fb:FormBuilder, private _router:Router, private _dataService: DataService){}
 
   ngOnInit(): void {
@@ -29,10 +30,18 @@ export class RegisterComponent implements OnInit{
     this._router.navigate(['/login'])
   }
   registerUser(){
+    this.hideSpinner = false;
     const data = this.registrationForm.value;
-    console.log(data)
-    this._dataService.post('v1/auth/register', data).subscribe(response => {
-      console.log(response);
-    });
+    this._dataService.post('v1/auth/register', data).subscribe({next: data => {
+      console.log('Data:', data);
+      this._dataService.token = data.token;
+      this._dataService.userObj = data.user;
+      this._router.navigate(['/home/stats']);
+      this.hideSpinner = true;
+    },
+    error: error => {
+      this._dataService.showSnackbar(error.error?.msg);
+      this.hideSpinner = true;
+    }})
   }
 }

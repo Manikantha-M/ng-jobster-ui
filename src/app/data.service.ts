@@ -7,9 +7,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   providedIn: 'root'
 })
 export class DataService {
+  // private apiUrl = '/api';
   private apiUrl = 'http://localhost:3000/api';
   public token:string = '';
-  public userObj: object = {};
+  public userObj: any = {name:'Test User'};
 
   // Since Angular app and Node.js server are on the same host, you can use a relative URL '/api'
 
