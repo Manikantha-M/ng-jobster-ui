@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit{
       console.log('Data:', data);
       this._dataService.token = data.token;
       this._dataService.userObj = data.user;
+      this._dataService.showSnackbar(`Welcome ${data.user.name}`);
       this._router.navigate(['/home/stats']);
       this.hideSpinner = true;
     },

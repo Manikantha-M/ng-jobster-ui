@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit{
       console.log('Data:', data);
       this._dataService.token = data.token;
       this._dataService.userObj = data.user;
+      this._dataService.showSnackbar(`Welcome ${data.user.name}`);
       this._router.navigate(['/home/stats']);
       this.hideSpinner = true;
     },
@@ -43,5 +44,23 @@ export class LoginComponent implements OnInit{
       this._dataService.showSnackbar(error.error?.msg);
       this.hideSpinner = true;
     }})
+  }
+
+  loginDemoUser() {
+    this.hideSpinner = false;
+    const data = {email:'testuser@test.com', password:'secret'};
+    this._dataService.post('v1/auth/login', data).subscribe({next: data => {
+      console.log('Data:', data);
+      this._dataService.token = data.token;
+      this._dataService.userObj = data.user;
+      this._dataService.showSnackbar(`Welcome ${data.user.name}`);
+      this._router.navigate(['/home/stats']);
+      this.hideSpinner = true;
+    },
+    error: error => {
+      this._dataService.showSnackbar(error.error?.msg);
+      this.hideSpinner = true;
+    }})
+
   }
 }
