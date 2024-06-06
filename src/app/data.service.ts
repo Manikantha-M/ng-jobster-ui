@@ -6,11 +6,18 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataService {
+  public hideSpinner: boolean = true;
   // private apiUrl = '/api';
   private apiUrl = 'http://localhost:3000/api';
   public token:string = '';
-  public userObj: any = {name:'Test User'};
+  public userObj: User = {
+    name: 'Test User',
+    email: 'testuser@test.com',
+    lastName: 'lastName',
+    location: 'my city'
+  };
 
   // Since Angular app and Node.js server are on the same host, you can use a relative URL '/api'
 
@@ -35,7 +42,8 @@ export class DataService {
   patch(endpoint: string, data: any): Observable<any> {
     return this.http.patch(`${this.apiUrl}/${endpoint}`, data, {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
       })
     });
   }
@@ -49,3 +57,11 @@ export class DataService {
     this._snackbar.open(message,'ok',{duration:3000});
   }
 }
+
+export interface User {
+  "email": string,
+  "lastName": string,
+  "location": string,
+  "name": string
+}
+

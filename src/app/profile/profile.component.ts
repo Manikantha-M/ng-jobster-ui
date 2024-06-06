@@ -4,6 +4,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DataService } from '../data.service';
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -12,16 +13,27 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit{
-
   profileForm!: FormGroup;
-  constructor(private _fb:FormBuilder){}
+  constructor(private _fb:FormBuilder, public _dataService:DataService){}
 
   ngOnInit(): void {
     this.profileForm = this._fb.group({
-      firstname:['test user'],
-      lastname:['shake and bake'],
-      email:['testuser@test.com'],
-      location:['vegan food truck']
+      firstname:[this._dataService.userObj.name, [Validators.required]],
+      lastname:[this._dataService.userObj.lastName, [Validators.required]],
+      email:[this._dataService.userObj.email, [Validators.required]],
+      location:[this._dataService.userObj.location, [Validators.required]]
     })
+  }
+  updateUser() {
+    this._dataService.hideSpinner = false;
+    const data = this.profileForm.value;
+    this._dataService.patch('v1/auth/updateUser', data).subscribe({next: data =>{
+      console.log(data);
+      this._dataService.hideSpinner = true;
+    },
+    error: error => {
+      this._dataService.showSnackbar(error.error?.msg);
+      this._dataService.hideSpinner = true;
+    }})
   }
 }

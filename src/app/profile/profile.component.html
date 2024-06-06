@@ -32,15 +32,16 @@
                 <div fxLayout="column nowrap" fxFlex="30">
                     <mat-form-field appearance="outline">
                         <mat-label>Location</mat-label>
-                        <input matInput type="text" formControlName="lastname">
+                        <input matInput type="text" formControlName="location">
                     </mat-form-field>
                 </div>
 
                 <!-- Button -->
                 <div fxLayout="column nowrap" fxFlex="30">
-                    <button class="delete-btn" mat-raised-button  style="margin-top: 6px; background: var(--primary-500);color: white;">Save Changes</button>
+                    <button class="delete-btn" mat-raised-button  style="margin-top: 6px; background: var(--primary-500);color: white;" (click)="updateUser()" [disabled]="!profileForm.valid">Save Changes</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+

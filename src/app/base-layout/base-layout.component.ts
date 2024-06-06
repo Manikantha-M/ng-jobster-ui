@@ -9,6 +9,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import { DataService } from '../data.service';
+import { SpinnerComponent } from '../spinner/spinner.component';
 export interface Section {
   name: string;
   icon: string;
@@ -16,7 +17,7 @@ export interface Section {
 @Component({
   selector: 'app-base-layout',
   standalone: true,
-  imports: [MatSidenavModule, MatButtonModule, MatRadioModule, RouterModule, MatIconModule, MatListModule, MatToolbarModule, FlexLayoutModule, MatMenuModule],
+  imports: [MatSidenavModule, MatButtonModule, MatRadioModule, RouterModule, MatIconModule, MatListModule, MatToolbarModule, FlexLayoutModule, MatMenuModule, SpinnerComponent],
   templateUrl: './base-layout.component.html',
   styleUrl: './base-layout.component.scss'
 })
