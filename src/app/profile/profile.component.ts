@@ -18,8 +18,8 @@ export class ProfileComponent implements OnInit{
 
   ngOnInit(): void {
     this.profileForm = this._fb.group({
-      firstname:[this._dataService.userObj.name, [Validators.required]],
-      lastname:[this._dataService.userObj.lastName, [Validators.required]],
+      name:[this._dataService.userObj.name, [Validators.required]],
+      lastName:[this._dataService.userObj.lastName, [Validators.required]],
       email:[this._dataService.userObj.email, [Validators.required]],
       location:[this._dataService.userObj.location, [Validators.required]]
     })
@@ -28,7 +28,9 @@ export class ProfileComponent implements OnInit{
     this._dataService.hideSpinner = false;
     const data = this.profileForm.value;
     this._dataService.patch('v1/auth/updateUser', data).subscribe({next: data =>{
-      console.log(data);
+      this._dataService.token = data.token;
+      this._dataService.userObj = data.user;
+      this._dataService.showSnackbar('Profile updated!');
       this._dataService.hideSpinner = true;
     },
     error: error => {
