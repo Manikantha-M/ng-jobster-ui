@@ -40,7 +40,9 @@ export class AllJobsComponent implements OnInit {
     {value: 'a-z', viewValue: 'a-z'},
     {value: 'z-a', viewValue: 'z-a'}
   ];
-
+  pageSize = 5;
+  pageIndex = 0;
+  pageOffset = this.pageSize * this.pageIndex;
   searchResultList: any[] = [];
   searchResultLength: number = 0;
   displayedColumns: string[] = ['position', 'company', 'jobLocation', 'createdAt'];
@@ -52,16 +54,16 @@ export class AllJobsComponent implements OnInit {
     this.searchForm = this._fb.group({
       search: [''],
       status: ['all'],
-      type: ['all'],
+      jobType: ['all'],
       sort: ['latest']
     });
     setTimeout(()=>{
-    this.getAllJobs();
+    this.getAllJobs('v1/jobs');
     },0);
   };
-  getAllJobs(){
+  getAllJobs(path:string){
     this._dataService.hideSpinner = false;
-    this._dataService.get('v1/jobs').subscribe({next: data => {
+    this._dataService.get(path).subscribe({next: data => {
       this.searchResultList = data.jobs;
       this.searchResultLength = data.count;
       this.dataSource = new MatTableDataSource(data.jobs);
@@ -83,7 +85,7 @@ export class AllJobsComponent implements OnInit {
     this._dataService.hideSpinner = false;
     this._dataService.delete(`v1/jobs/${jobID}`).subscribe({next: data => {
       this._dataService.showSnackbar('Deleted Job!');
-      this.getAllJobs();
+      this.getAllJobs('v1/jobs');
     }, 
     error: error => {
       this._dataService.showSnackbar(error.error?.msg);
@@ -91,4 +93,12 @@ export class AllJobsComponent implements OnInit {
     }})
 
   }
+
+  filterChange(){
+    this._dataService.hideSpinner = false;
+    const filterObj = this.searchForm.value;
+    let queryParams = `?status=${filterObj.status}&jobType=${filterObj.jobType}&sort=${filterObj.sort}&page=${this.pageIndex}`;
+    if(filterObj.search) queryParams += `&search=${filterObj.search}`;
+    this.getAllJobs(`v1/jobs${queryParams}`);
+  };
 }
