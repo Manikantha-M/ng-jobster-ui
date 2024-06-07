@@ -62,7 +62,11 @@ export class DataService {
 
   // DELETE request
   delete(endpoint: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${endpoint}`);
+    return this.http.delete(`${this.apiUrl}/${endpoint}`, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      })
+    });
   }
   
   showSnackbar(message: string){

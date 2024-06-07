@@ -78,4 +78,17 @@ export class AllJobsComponent implements OnInit {
     this._dataService.editJobObj = job;
     this._router.navigate(['/home/add-job']);
   }
+
+  deleteJob(jobID:string){
+    this._dataService.hideSpinner = false;
+    this._dataService.delete(`v1/jobs/${jobID}`).subscribe({next: data => {
+      this._dataService.showSnackbar('Deleted Job!');
+      this.getAllJobs();
+    }, 
+    error: error => {
+      this._dataService.showSnackbar(error.error?.msg);
+      this._dataService.hideSpinner = true;
+    }})
+
+  }
 }
