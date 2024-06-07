@@ -55,10 +55,10 @@
             <!-- Button -->
             <div fxLayout="row nowrap" fxFlex="30" fxLayoutGap = "12px">
                 <div fxFlex="48">
-                    <button class="edit-btn width-100 clear-btn" mat-raised-button style="margin-top: 6px;">Clear</button>
+                    <button class="edit-btn width-100 clear-btn" mat-raised-button style="margin-top: 6px;" (click)="clearJobForm()">Clear</button>
                 </div>
                 <div fxFlex="48">
-                    <button class="width-100" mat-raised-button style="margin-top: 6px; background: var(--primary-500);color: white;" (click)="addAJob()">Submit</button>
+                    <button class="width-100" mat-raised-button style="margin-top: 6px; background: var(--primary-500);color: white;" (click)="addAJob()" [disabled]="!addJobForm.valid">Submit</button>
                 </div>
             </div>
         </div>

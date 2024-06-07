@@ -34,11 +34,11 @@ export class AddJobComponent implements OnInit{
   
   ngOnInit() {
     this.addJobForm = this._fb.group({
-      position:[''],
-      company:[''],
-      jobLocation:[this._dataService.userObj.location],
-      status: ['pending'],
-      jobType: ['full-time']
+      position:['', [Validators.required]],
+      company:['', [Validators.required]],
+      jobLocation:[this._dataService.userObj.location, [Validators.required]],
+      status: ['pending', [Validators.required]],
+      jobType: ['full-time', [Validators.required]]
     });
     const editJobObj = this._dataService.editJobObj;
     if(Object.values(editJobObj || {}).length > 0) {
@@ -59,6 +59,7 @@ export class AddJobComponent implements OnInit{
           this.pageTitle = 'Add Job';
           this._dataService.editJobObj = {};
           this.editJobReq = false;
+          this.addJobForm.patchValue({position:'', company:'', jobLocation: this._dataService.userObj.location, status:'pending', jobType:'full-time'});
         }, error: error => {
           this._dataService.showSnackbar(error.error?.msg);
           this._dataService.hideSpinner = true;
@@ -75,6 +76,10 @@ export class AddJobComponent implements OnInit{
       }});
     }
   };
+
+  clearJobForm(){
+    this.addJobForm.patchValue({position:'', company:'', jobLocation:'', status:'', jobType:''});
+  }
 
   ngOnDestroy(){
     this._dataService.editJobObj = {};
