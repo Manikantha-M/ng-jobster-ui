@@ -41,7 +41,7 @@ export class AllJobsComponent implements OnInit {
   ];
 
   searchResultList: any[] = [];
-
+  searchResultLength: number = 0;
   displayedColumns: string[] = ['position', 'company', 'jobLocation', 'createdAt'];
   dataSource:any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -54,15 +54,22 @@ export class AllJobsComponent implements OnInit {
       type: ['all'],
       sort: ['latest']
     });
+    setTimeout(()=>{
     this.getAllJobs();
+    },0);
   };
   getAllJobs(){
+    this._dataService.hideSpinner = false;
     this._dataService.get('v1/jobs').subscribe({next: data => {
-      console.log(data.jobs, 'jobs list');
       this.searchResultList = data.jobs;
+      this.searchResultLength = data.count;
       this.dataSource = new MatTableDataSource(data.jobs);
       this.dataSource.paginator = this.paginator;
+      this._dataService.showSnackbar('Results Fetched!');
+      this._dataService.hideSpinner = true;
     }, error: error => {
+      this._dataService.showSnackbar(error.error?.msg);
+      this._dataService.hideSpinner = true;
     }})
   }
 }
