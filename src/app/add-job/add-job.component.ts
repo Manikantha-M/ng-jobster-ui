@@ -14,6 +14,7 @@ import { DataService } from '../data.service';
   styleUrl: './add-job.component.scss'
 })
 export class AddJobComponent implements OnInit{
+  pageTitle = 'Add Job';
   addJobForm!: FormGroup;
   statusArr = [
     // {value: 'all', viewValue: 'all'},

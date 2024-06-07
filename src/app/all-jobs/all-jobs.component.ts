@@ -10,6 +10,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { DataService } from '../data.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-all-jobs',
   standalone: true,
@@ -46,7 +47,7 @@ export class AllJobsComponent implements OnInit {
   dataSource:any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _fb:FormBuilder, private _dataService:DataService){}
+  constructor(private _fb:FormBuilder, private _dataService:DataService, private _router: Router){}
   ngOnInit() {
     this.searchForm = this._fb.group({
       search: [''],
@@ -71,5 +72,10 @@ export class AllJobsComponent implements OnInit {
       this._dataService.showSnackbar(error.error?.msg);
       this._dataService.hideSpinner = true;
     }})
+  }
+
+  editJob(job:object){
+    this._dataService.editJobObj = job;
+    this._router.navigate(['/home/add-job']);
   }
 }
