@@ -5,7 +5,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { DataService } from '../data.service';
 @Component({
   selector: 'app-add-job',
   standalone: true,
@@ -28,15 +28,26 @@ export class AddJobComponent implements OnInit{
     {value: 'remote', viewValue: 'remote'},
     {value: 'internship', viewValue: 'internship'}
   ];
-  constructor(private _fb:FormBuilder){}
+  constructor(private _fb:FormBuilder, public _dataService:DataService){}
   
   ngOnInit() {
     this.addJobForm = this._fb.group({
       position:[''],
       company:[''],
-      jobLocation:['vegan food truck'],
+      jobLocation:[this._dataService.userObj.location],
       status: ['pending'],
       jobType: ['full-time']
     })
+  };
+  addAJob() {
+    this._dataService.hideSpinner = false;
+    const data = this.addJobForm.value;
+    this._dataService.post('v1/jobs', data).subscribe({next: data =>{
+      this._dataService.showSnackbar('Job Created!');
+      this._dataService.hideSpinner = true;
+    }, error: error =>{
+      this._dataService.showSnackbar(error.error?.msg);
+      this._dataService.hideSpinner = true;
+    }});
   }
 }

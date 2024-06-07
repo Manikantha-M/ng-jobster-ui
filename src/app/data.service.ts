@@ -21,7 +21,13 @@ export class DataService {
 
   // Since Angular app and Node.js server are on the same host, you can use a relative URL '/api'
 
-  constructor(private http: HttpClient, private _snackbar:MatSnackBar) { }
+  constructor(private http: HttpClient, private _snackbar:MatSnackBar) { 
+    if(Object.values(sessionStorage.getItem('jobsterAPI') || {}).length){
+      const userData: any =  JSON.parse(sessionStorage.getItem('jobsterAPI') || '{}');
+      this.userObj = userData?.user;
+      this.token = userData.token;
+    }
+  }
 
 
   // GET request
@@ -33,7 +39,8 @@ export class DataService {
   post(endpoint: string, data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/${endpoint}`, data, {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
       })
     });
   }

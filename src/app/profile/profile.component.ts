@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit{
     this._dataService.hideSpinner = false;
     const data = this.profileForm.value;
     this._dataService.patch('v1/auth/updateUser', data).subscribe({next: data =>{
+      sessionStorage.setItem('jobsterAPI', JSON.stringify(data));
       this._dataService.token = data.token;
       this._dataService.userObj = data.user;
       this._dataService.showSnackbar('Profile updated!');

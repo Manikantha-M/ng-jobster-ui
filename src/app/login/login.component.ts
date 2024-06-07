@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit{
 
     this._dataService.post('v1/auth/login', data).subscribe({next: data => {
       console.log('Data:', data);
+      sessionStorage.setItem('jobsterAPI', JSON.stringify(data));
       this._dataService.token = data.token;
       this._dataService.userObj = data.user;
       this._dataService.showSnackbar(`Welcome ${data.user.name}`);
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit{
     const data = {email:'testuser@test.com', password:'secret'};
     this._dataService.post('v1/auth/login', data).subscribe({next: data => {
       console.log('Data:', data);
+      sessionStorage.setItem('jobsterAPI', JSON.stringify(data));
       this._dataService.token = data.token;
       this._dataService.userObj = data.user;
       this._dataService.showSnackbar(`Welcome ${data.user.name}`);
