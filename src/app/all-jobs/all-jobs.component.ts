@@ -9,6 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { DatePipe } from '@angular/common';
+import { DataService } from '../data.service';
 @Component({
   selector: 'app-all-jobs',
   standalone: true,
@@ -39,143 +40,29 @@ export class AllJobsComponent implements OnInit {
     {value: 'z-a', viewValue: 'z-a'}
   ];
 
-  searchResultList: any[] = [
-      {
-        "_id": "661d70a2274fcd3e5632f607",
-        "company": "Hoppe and Sons",
-        "position": "GIS Technical Architect",
-        "status": "declined",
-        "createdBy": "661d70085cc1037099a12cb3",
-        "jobType": "part-time",
-        "jobLocation": "my city",
-        "createdAt": "2022-08-09T00:46:14.000Z",
-        "updatedAt": "2022-08-09T00:46:14.000Z",
-        "__v": 0
-      },
-      {
-        "_id": "661d70a2274fcd3e5632f63e",
-        "company": "Kilback-Morissette",
-        "position": "Human Resources Manager",
-        "status": "interview",
-        "createdBy": "661d70085cc1037099a12cb3",
-        "jobType": "internship",
-        "jobLocation": "my city",
-        "createdAt": "2022-08-06T21:17:03.000Z",
-        "updatedAt": "2022-08-06T21:17:03.000Z",
-        "__v": 0
-      },
-      {
-        "_id": "661d70a2274fcd3e5632f630",
-        "company": "Ward and Sons",
-        "position": "Graphic Designer",
-        "status": "interview",
-        "createdBy": "661d70085cc1037099a12cb3",
-        "jobType": "remote",
-        "jobLocation": "my city",
-        "createdAt": "2022-08-06T19:00:39.000Z",
-        "updatedAt": "2022-08-06T19:00:39.000Z",
-        "__v": 0
-      },
-      {
-        "_id": "661d70a2274fcd3e5632f635",
-        "company": "Schowalter, Smith and Boyle",
-        "position": "Information Systems Manager",
-        "status": "pending",
-        "createdBy": "661d70085cc1037099a12cb3",
-        "jobType": "full-time",
-        "jobLocation": "my city",
-        "createdAt": "2022-08-03T17:37:33.000Z",
-        "updatedAt": "2022-08-03T17:37:33.000Z",
-        "__v": 0
-      },
-      {
-        "_id": "661d70a2274fcd3e5632f646",
-        "company": "Toy, Witting and Moen",
-        "position": "Account Executive",
-        "status": "declined",
-        "createdBy": "661d70085cc1037099a12cb3",
-        "jobType": "full-time",
-        "jobLocation": "my city",
-        "createdAt": "2022-08-03T07:08:07.000Z",
-        "updatedAt": "2022-08-03T07:08:07.000Z",
-        "__v": 0
-      },
-      {
-        "_id": "661d70a2274fcd3e5632f612",
-        "company": "Cruickshank and Sons",
-        "position": "Actuary",
-        "status": "declined",
-        "createdBy": "661d70085cc1037099a12cb3",
-        "jobType": "remote",
-        "jobLocation": "my city",
-        "createdAt": "2022-07-22T18:06:19.000Z",
-        "updatedAt": "2022-07-22T18:06:19.000Z",
-        "__v": 0
-      },
-      {
-        "_id": "661d70a2274fcd3e5632f60c",
-        "company": "Swift Group",
-        "position": "Staff Accountant II",
-        "status": "interview",
-        "createdBy": "661d70085cc1037099a12cb3",
-        "jobType": "part-time",
-        "jobLocation": "my city",
-        "createdAt": "2022-07-13T08:56:08.000Z",
-        "updatedAt": "2022-07-13T08:56:08.000Z",
-        "__v": 0
-      },
-      {
-        "_id": "661d70a2274fcd3e5632f619",
-        "company": "Weber-Walker",
-        "position": "Financial Advisor",
-        "status": "interview",
-        "createdBy": "661d70085cc1037099a12cb3",
-        "jobType": "internship",
-        "jobLocation": "my city",
-        "createdAt": "2022-07-11T05:28:00.000Z",
-        "updatedAt": "2022-07-11T05:28:00.000Z",
-        "__v": 0
-      },
-      {
-        "_id": "661d70a2274fcd3e5632f641",
-        "company": "Pagac-Davis",
-        "position": "Structural Engineer",
-        "status": "interview",
-        "createdBy": "661d70085cc1037099a12cb3",
-        "jobType": "full-time",
-        "jobLocation": "my city",
-        "createdAt": "2022-07-04T19:51:53.000Z",
-        "updatedAt": "2022-07-04T19:51:53.000Z",
-        "__v": 0
-      },
-      {
-        "_id": "661d70a2274fcd3e5632f64c",
-        "company": "Orn LLC",
-        "position": "Marketing Assistant",
-        "status": "interview",
-        "createdBy": "661d70085cc1037099a12cb3",
-        "jobType": "internship",
-        "jobLocation": "my city",
-        "createdAt": "2022-07-04T11:29:41.000Z",
-        "updatedAt": "2022-07-04T11:29:41.000Z",
-        "__v": 0
-      }
-    ];
+  searchResultList: any[] = [];
 
   displayedColumns: string[] = ['position', 'company', 'jobLocation', 'createdAt'];
-  dataSource = new MatTableDataSource(this.searchResultList);
+  dataSource:any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
 
-  constructor(private _fb:FormBuilder){}
+  constructor(private _fb:FormBuilder, private _dataService:DataService){}
   ngOnInit() {
     this.searchForm = this._fb.group({
       search: [''],
       status: ['all'],
       type: ['all'],
       sort: ['latest']
-    })
+    });
+    this.getAllJobs();
+  };
+  getAllJobs(){
+    this._dataService.get('v1/jobs').subscribe({next: data => {
+      console.log(data.jobs, 'jobs list');
+      this.searchResultList = data.jobs;
+      this.dataSource = new MatTableDataSource(data.jobs);
+      this.dataSource.paginator = this.paginator;
+    }, error: error => {
+    }})
   }
 }

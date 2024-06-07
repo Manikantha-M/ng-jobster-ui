@@ -32,7 +32,11 @@ export class DataService {
 
   // GET request
   get(endpoint: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${endpoint}`);
+    return this.http.get(`${this.apiUrl}/${endpoint}`, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      })
+    });
   }
 
   // POST request
