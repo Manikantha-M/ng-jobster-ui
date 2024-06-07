@@ -15,6 +15,7 @@ import { DataService } from '../data.service';
 })
 export class AddJobComponent implements OnInit{
   pageTitle = 'Add Job';
+  editJobReq: boolean = false;
   addJobForm!: FormGroup;
   statusArr = [
     // {value: 'all', viewValue: 'all'},
@@ -38,17 +39,44 @@ export class AddJobComponent implements OnInit{
       jobLocation:[this._dataService.userObj.location],
       status: ['pending'],
       jobType: ['full-time']
-    })
+    });
+    const editJobObj = this._dataService.editJobObj;
+    if(Object.values(editJobObj || {}).length > 0) {
+      this.pageTitle = 'Edit Job';
+      this.addJobForm.patchValue(editJobObj);
+      this.editJobReq = true;
+    }
   };
   addAJob() {
     this._dataService.hideSpinner = false;
     const data = this.addJobForm.value;
-    this._dataService.post('v1/jobs', data).subscribe({next: data =>{
-      this._dataService.showSnackbar('Job Created!');
-      this._dataService.hideSpinner = true;
-    }, error: error =>{
-      this._dataService.showSnackbar(error.error?.msg);
-      this._dataService.hideSpinner = true;
-    }});
+
+    if(this.editJobReq){
+      this._dataService.patch(`v1/jobs/${this._dataService.editJobObj._id}`, data).subscribe({
+        next: data =>{
+          this._dataService.showSnackbar('Job Updated!');
+          this._dataService.hideSpinner = true;
+          this.pageTitle = 'Add Job';
+          this._dataService.editJobObj = {};
+          this.editJobReq = false;
+        }, error: error => {
+          this._dataService.showSnackbar(error.error?.msg);
+          this._dataService.hideSpinner = true;
+        }
+      })
+    }
+    else{
+      this._dataService.post('v1/jobs', data).subscribe({next: data =>{
+        this._dataService.showSnackbar('Job Created!');
+        this._dataService.hideSpinner = true;
+      }, error: error =>{
+        this._dataService.showSnackbar(error.error?.msg);
+        this._dataService.hideSpinner = true;
+      }});
+    }
+  };
+
+  ngOnDestroy(){
+    this._dataService.editJobObj = {};
   }
 }

@@ -18,7 +18,7 @@ export class DataService {
     lastName: 'lastName',
     location: 'my city'
   };
-  public editJobObj:any;
+  public editJobObj:any = {};
 
   // Since Angular app and Node.js server are on the same host, you can use a relative URL '/api'
 
