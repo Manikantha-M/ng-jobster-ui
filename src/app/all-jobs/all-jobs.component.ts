@@ -46,7 +46,7 @@ export class AllJobsComponent implements OnInit {
   searchResultList: any[] = [];
   searchResultLength: number = 0;
   displayedColumns: string[] = ['position', 'company', 'jobLocation', 'createdAt'];
-  dataSource:any = [];
+  dataSource:any = new MatTableDataSource([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private _fb:FormBuilder, private _dataService:DataService, private _router: Router){}
@@ -58,16 +58,18 @@ export class AllJobsComponent implements OnInit {
       sort: ['latest']
     });
     setTimeout(()=>{
-    this.getAllJobs('v1/jobs');
-    },0);
+      this.getAllJobs(`v1/jobs?pageIndex=${this.pageIndex}&limit=${this.pageSize}`);
+      },0);
   };
+  ngAfterViewInit(){
+    this.dataSource.paginator = this.paginator;
+  }
   getAllJobs(path:string){
     this._dataService.hideSpinner = false;
     this._dataService.get(path).subscribe({next: data => {
       this.searchResultList = data.jobs;
-      this.searchResultLength = data.count;
       this.dataSource = new MatTableDataSource(data.jobs);
-      this.dataSource.paginator = this.paginator;
+      this.searchResultLength = data.count;      
       this._dataService.showSnackbar('Results Fetched!');
       this._dataService.hideSpinner = true;
     }, error: error => {
@@ -85,7 +87,7 @@ export class AllJobsComponent implements OnInit {
     this._dataService.hideSpinner = false;
     this._dataService.delete(`v1/jobs/${jobID}`).subscribe({next: data => {
       this._dataService.showSnackbar('Deleted Job!');
-      this.getAllJobs('v1/jobs');
+      this.getAllJobs(`v1/jobs?pageIndex=${this.pageIndex}&limit=${this.pageSize}`);
     }, 
     error: error => {
       this._dataService.showSnackbar(error.error?.msg);
@@ -101,4 +103,14 @@ export class AllJobsComponent implements OnInit {
     if(filterObj.search) queryParams += `&search=${filterObj.search}`;
     this.getAllJobs(`v1/jobs${queryParams}`);
   };
+
+  pageEvent(event:any){
+    console.log(event, 'pagination event');
+    this.getAllJobs(`v1/jobs?pageIndex=${event.pageIndex}&limit=${event.pageSize}`);
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+    this.searchResultLength = 51
+    // console.log(`v1/jobs?pageIndex=${event.pageIndex}&limit=${event.pageSize}`)
+    
+  }
 }
