@@ -43,6 +43,7 @@ export class AllJobsComponent implements OnInit {
   pageSize = 5;
   pageIndex = 0;
   pageOffset = this.pageSize * this.pageIndex;
+  filterOptions = `status=all&jobType=all&sort=latest`;
   searchResultList: any[] = [];
   searchResultLength: number = 0;
   displayedColumns: string[] = ['position', 'company', 'jobLocation', 'createdAt'];
@@ -58,7 +59,7 @@ export class AllJobsComponent implements OnInit {
       sort: ['latest']
     });
     setTimeout(()=>{
-      this.getAllJobs(`v1/jobs?pageIndex=${this.pageIndex}&limit=${this.pageSize}`);
+      this.getAllJobs(`v1/jobs?${this.filterOptions}&pageIndex=${this.pageIndex}&limit=${this.pageSize}`);
       },0);
   };
   ngAfterViewInit(){
@@ -87,7 +88,7 @@ export class AllJobsComponent implements OnInit {
     this._dataService.hideSpinner = false;
     this._dataService.delete(`v1/jobs/${jobID}`).subscribe({next: data => {
       this._dataService.showSnackbar('Deleted Job!');
-      this.getAllJobs(`v1/jobs?pageIndex=${this.pageIndex}&limit=${this.pageSize}`);
+      this.getAllJobs(`v1/jobs?${this.filterOptions}&pageIndex=${this.pageIndex}&limit=${this.pageSize}`);
     }, 
     error: error => {
       this._dataService.showSnackbar(error.error?.msg);
@@ -96,21 +97,32 @@ export class AllJobsComponent implements OnInit {
 
   }
 
-  filterChange(){
+  filterChange(filterChange:string){
+    if(filterChange == 'search' && !this.searchForm.value.search) return;
     this._dataService.hideSpinner = false;
     const filterObj = this.searchForm.value;
-    let queryParams = `?status=${filterObj.status}&jobType=${filterObj.jobType}&sort=${filterObj.sort}&page=${this.pageIndex}`;
+    let queryParams = `status=${filterObj.status}&jobType=${filterObj.jobType}&sort=${filterObj.sort}`;
     if(filterObj.search) queryParams += `&search=${filterObj.search}`;
-    this.getAllJobs(`v1/jobs${queryParams}`);
+    this.filterOptions = queryParams;
+    this.getAllJobs(`v1/jobs?${queryParams}&pageIndex=${this.pageIndex}&limit=${this.pageSize}`);
   };
 
   pageEvent(event:any){
-    console.log(event, 'pagination event');
-    this.getAllJobs(`v1/jobs?pageIndex=${event.pageIndex}&limit=${event.pageSize}`);
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
-    this.searchResultLength = 51
-    // console.log(`v1/jobs?pageIndex=${event.pageIndex}&limit=${event.pageSize}`)
+    this.getAllJobs(`v1/jobs?${this.filterOptions}&pageIndex=${this.pageIndex}&limit=${this.pageSize}`);
     
+  }
+
+  clearFilter(){
+    this.searchForm.patchValue({
+      search: '',
+      status: 'all',
+      jobType: 'all',
+      sort: 'latest'
+    })
+    this.filterOptions = `status=all&jobType=all&sort=latest`;
+    this.pageIndex = 0;
+    this.getAllJobs(`v1/jobs?${this.filterOptions}&pageIndex=${this.pageIndex}&limit=${this.pageSize}`);
   }
 }

@@ -9,7 +9,7 @@
         <div fxLayout="column nowrap" fxFlex="30">
             <mat-form-field appearance="outline">
                 <mat-label>Search</mat-label>
-                <input matInput type="text" formControlName="search" (blur)="filterChange()">
+                <input matInput type="text" formControlName="search" (blur)="filterChange('search')">
             </mat-form-field>
         </div>
 
@@ -17,7 +17,7 @@
         <div fxLayout="column nowrap" fxFlex="30">
             <mat-form-field appearance="outline">
                 <mat-label>Status</mat-label>
-                <mat-select formControlName="status" (selectionChange)="filterChange()">
+                <mat-select formControlName="status" (selectionChange)="filterChange('status')">
                     @for (option of statusArr; track option) {
                     <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
                     }
@@ -29,7 +29,7 @@
         <div fxLayout="column nowrap" fxFlex="30">
             <mat-form-field appearance="outline">
                 <mat-label>Job Type</mat-label>
-                <mat-select formControlName="jobType" (selectionChange)="filterChange()">
+                <mat-select formControlName="jobType" (selectionChange)="filterChange('jobType')">
                     @for (option of typeArr; track option) {
                     <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
                     }
@@ -41,7 +41,7 @@
         <div fxLayout="column nowrap" fxFlex="30">
             <mat-form-field appearance="outline">
                 <mat-label>Sort</mat-label>
-                <mat-select formControlName="sort" (selectionChange)="filterChange()">  
+                <mat-select formControlName="sort" (selectionChange)="filterChange('sort')">  
                     @for (option of sortArr; track option) {
                     <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
                     }
@@ -51,7 +51,7 @@
 
         <!-- Button -->
         <div fxLayout="column nowrap" fxFlex="30">
-            <button class="delete-btn" mat-raised-button style="margin-top: 6px;">Clear Filters</button>
+            <button class="delete-btn" mat-raised-button style="margin-top: 6px;" (click)="clearFilter()">Clear Filters</button>
         </div>
     </div>
 </form>
