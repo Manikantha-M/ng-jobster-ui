@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit{
       this.hideSpinner = true;
     },
     error: error => {
-      this._dataService.showSnackbar(error.error?.msg);
+      this._dataService.showSnackbar(error.error?.msg || error.error);
       this.hideSpinner = true;
     }})
   }

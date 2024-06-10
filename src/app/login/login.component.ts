@@ -28,9 +28,10 @@ export class LoginComponent implements OnInit{
   goToRegister(){
     this._router.navigate(['/register']);
   }
-  loginUser() {
+  loginUser(isDemoUser:boolean = false) {
     this.hideSpinner = false;
-    const data = this.loginForm.value;
+    let data = this.loginForm.value;
+    if(isDemoUser) data = {email:'testuser@test.com', password:'secret'};
 
     this._dataService.post('v1/auth/login', data).subscribe({next: data => {
       console.log('Data:', data);
@@ -42,27 +43,12 @@ export class LoginComponent implements OnInit{
       this.hideSpinner = true;
     },
     error: error => {
-      this._dataService.showSnackbar(error.error?.msg);
+      this._dataService.showSnackbar(error.error?.msg || error.error);
       this.hideSpinner = true;
     }})
   }
 
   loginDemoUser() {
-    this.hideSpinner = false;
-    const data = {email:'testuser@test.com', password:'secret'};
-    this._dataService.post('v1/auth/login', data).subscribe({next: data => {
-      console.log('Data:', data);
-      sessionStorage.setItem('jobsterAPI', JSON.stringify(data));
-      this._dataService.token = data.token;
-      this._dataService.userObj = data.user;
-      this._dataService.showSnackbar(`Welcome ${data.user.name}`);
-      this._router.navigate(['/home/stats']);
-      this.hideSpinner = true;
-    },
-    error: error => {
-      this._dataService.showSnackbar(error.error?.msg);
-      this.hideSpinner = true;
-    }})
-
+    this.loginUser(true);
   }
 }
