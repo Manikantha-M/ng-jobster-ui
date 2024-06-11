@@ -29,7 +29,7 @@ export class BaseLayoutComponent {
       name: 'Stats',
       icon:'signal_cellular_alt',
       route:'home/stats',
-      selected: true
+      selected: false
     },
     {
       name: 'All Jobs',
@@ -59,4 +59,21 @@ export class BaseLayoutComponent {
   logoutUser(){
     this._router.navigate(['/login'])
   }
+  ngDoCheck(){
+    const routeUrl = this._router.url;
+    switch(routeUrl){
+      case '/home/stats':
+        this.sideMenu[0].selected = true;
+        break;
+      case '/home/all-jobs':
+        this.sideMenu[1].selected = true;
+        break;
+      case '/home/add-job':
+        this.sideMenu[2].selected = true;
+        break;
+      case '/home/profile':
+        this.sideMenu[3].selected = true;
+        break;
+    }
+    }
 }

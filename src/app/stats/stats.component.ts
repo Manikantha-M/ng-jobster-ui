@@ -37,31 +37,18 @@ export class StatsComponent {
       color:'#D66A6A'
     }
   ]; 
-  singleBarChart = [
-    {
-      "name": "Germany",
-      "value": 8940000
-    },
-    {
-      "name": "USA",
-      "value": 5000000
-    },
-    {
-      "name": "France",
-      "value": 7200000
-    }
-  ];
+  singleBarChart = [];
   // view: any = [700, 400];
   view: any = [window.innerWidth/1.2, 400];
    // options
   showXAxis = true;
   showYAxis = true;
   gradient = false;
-  showLegend = true;
+  showLegend = false;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Month';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'No of Applications';
 
   colorScheme:any = {
     domain: ['#3B81F6']
@@ -79,9 +66,11 @@ export class StatsComponent {
       this.statCards[0].count = stats.pending;
       this.statCards[1].count = stats.interview;
       this.statCards[2].count = stats.declined;
+      this.singleBarChart = data.monthlyApplications;
       this._dataService.hideSpinner = true;
     }, error:error =>{
-      console.log(error)
+      // console.log(error);
+      this._dataService.showSnackbar('Failed to fetch chart data')
       this._dataService.hideSpinner = true;
     }})
   }

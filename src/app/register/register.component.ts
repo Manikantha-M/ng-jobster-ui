@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit{
     this.hideSpinner = false;
     const data = this.registrationForm.value;
     this._dataService.post('v1/auth/register', data).subscribe({next: data => {
-      console.log('Data:', data);
       sessionStorage.setItem('jobsterAPI', JSON.stringify(data));
       this._dataService.token = data.token;
       this._dataService.userObj = data.user;

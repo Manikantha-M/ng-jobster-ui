@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit{
     if(isDemoUser) data = {email:'testuser@test.com', password:'secret'};
 
     this._dataService.post('v1/auth/login', data).subscribe({next: data => {
-      console.log('Data:', data);
       sessionStorage.setItem('jobsterAPI', JSON.stringify(data));
       this._dataService.token = data.token;
       this._dataService.userObj = data.user;
