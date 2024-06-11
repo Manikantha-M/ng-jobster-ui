@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
+import { DataService } from '../data.service';
 export interface StatCard {
   count: number,
   iocn:string,
@@ -19,13 +19,13 @@ export interface StatCard {
 export class StatsComponent {
   statCards: StatCard [] = [
     {
-      count: 28,
+      count: 0,
       iocn: 'work_history',
       title: 'Pending Applications',
       color:'#E8B949'
     },
     {
-      count: 25,
+      count: 0,
       iocn: 'event_available',
       title: 'Interviews Scheduled',
       color:'#6379CB'
@@ -66,6 +66,25 @@ export class StatsComponent {
   colorScheme:any = {
     domain: ['#3B81F6']
   };
+  constructor(private _dataService:DataService) {}
+  ngOnInit() {
+    setTimeout(()=>{
+      this.getAllStats();
+      },0);
+  }
+  getAllStats(){
+    this._dataService.hideSpinner = false;
+    this._dataService.get('v1/jobs/stats').subscribe({next: data =>{
+      const {stats} = data;
+      this.statCards[0].count = stats.pending;
+      this.statCards[1].count = stats.interview;
+      this.statCards[2].count = stats.declined;
+      this._dataService.hideSpinner = true;
+    }, error:error =>{
+      console.log(error)
+      this._dataService.hideSpinner = true;
+    }})
+  }
   onSelect(event:any) {
     // console.log(event);
   }
