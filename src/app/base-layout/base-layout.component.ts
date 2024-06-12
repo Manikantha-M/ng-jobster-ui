@@ -60,6 +60,9 @@ export class BaseLayoutComponent {
     this._router.navigate(['/login'])
   }
   ngDoCheck(){
+    const selectedRoute =  this.sideMenu.find(item => item.selected) || {};
+    if(selectedRoute.hasOwnProperty('selected')) {selectedRoute.selected = false};
+
     const routeUrl = this._router.url;
     switch(routeUrl){
       case '/home/stats':
