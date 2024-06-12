@@ -104,6 +104,7 @@ export class AllJobsComponent implements OnInit {
     let queryParams = `status=${filterObj.status}&jobType=${filterObj.jobType}&sort=${filterObj.sort}`;
     if(filterObj.search) queryParams += `&search=${filterObj.search}`;
     this.filterOptions = queryParams;
+    this.pageIndex = 0;
     this.getAllJobs(`v1/jobs?${queryParams}&pageIndex=${this.pageIndex}&limit=${this.pageSize}`);
   };
 
